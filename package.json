@@ -1,0 +1,23 @@
+{
+  "name": "eip7702-smart-account",
+  "version": "1.0.0",
+  "description": "Convert EOA to EIP-7702 smart account on Sepolia",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "dependencies": {
+    "@metamask/delegation-toolkit": "^0.13.0",
+    "dotenv": "^16.3.1",
+    "viem": "^2.0.0"
+  },
+  "keywords": [
+    "eip7702",
+    "smart-account",
+    "ethereum",
+    "sepolia"
+  ],
+  "author": "",
+  "license": "MIT"
+}
