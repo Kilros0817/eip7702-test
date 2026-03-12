@@ -2,11 +2,15 @@
   "name": "eip7702-smart-account",
   "version": "1.0.0",
   "description": "Convert EOA to EIP-7702 smart account on Sepolia",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node index.js",
-    "sponsor:delegation": "node sponsor-delegation.js"
+    "start": "node src/index.js convert",
+    "dev": "node src/index.js convert",
+    "get-bytecode": "node src/index.js get-bytecode",
+    "revert": "node src/index.js revert",
+    "direct": "node src/index.js direct",
+    "sponsor": "node src/index.js sponsor",
+    "sponsor:delegation": "node src/index.js sponsor-delegation"
   },
   "dependencies": {
     "@metamask/delegation-toolkit": "^0.13.0",

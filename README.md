@@ -38,6 +38,17 @@ EIP-7702 allows EOAs to delegate their execution to smart contracts, effectively
 
 ## Usage
 
+All commands run from the single entry point `src/index.js`. Run `node src/index.js` with no arguments to list commands.
+
+| Command | npm script | Description |
+|---------|------------|-------------|
+| convert | `npm start` | EIP-7702 per-transaction delegation (self) |
+| get-bytecode | `npm run get-bytecode` | Get bytecode of an address |
+| revert | `npm run revert` | Revert EIP-7702 delegation |
+| direct | `npm run direct` | Direct batch ETH transfer (self-funded) |
+| sponsor | `npm run sponsor` | Sponsored batch ETH transfer |
+| sponsor-delegation | `npm run sponsor:delegation` | Sponsor sets up delegation |
+
 ### 1. EIP-7702 Smart Account Conversion
 
 1. **Get Sepolia ETH**: You need some Sepolia ETH for gas fees. Get it from:
@@ -53,46 +64,28 @@ EIP-7702 allows EOAs to delegate their execution to smart contracts, effectively
 ### 2. Get Bytecode of an Address
 
 ```bash
-node get-bytecode.js
+npm run get-bytecode
 ```
 
-Edit the configuration at the top of `get-bytecode.js`:
-```javascript
-const TARGET_ADDRESS = '0x1234567890123456789012345678901234567890'; // 👈 CHANGE THIS
-const RPC_URL = 'https://ethereum-sepolia-rpc.publicnode.com'; // 👈 CHANGE THIS
-const NETWORK = sepolia; // 👈 CHANGE THIS
-```
+Edit `CONFIG.getBytecode` at the top of `src/index.js` (address, rpcUrl, chain).
 
 ### 3. Sponsored ETH Transfer from EIP-7702 Smart Account
 
 ```bash
-node sponsor-transfer.js
+npm run sponsor
 ```
 
-Edit the configuration at the top of `sponsor-transfer.js`:
-```javascript
-const SMART_ACCOUNT_ADDRESS = '0x0d4c141A24e325981FDE16cd436aeBe8c55d0685'; // 👈 EIP-7702 Smart Account
-const RECIPIENT_ADDRESS = '0x1234567890123456789012345678901234567890'; // 👈 Recipient
-const TRANSFER_AMOUNT = '0.001'; // 👈 Amount in ETH
-```
+Edit `CONFIG.sponsorRecipients` in `src/index.js` (address and amount per recipient).
 
-### 4. Batch ETH Transfer from EIP-7702 Smart Account
+### 4. Direct Batch ETH Transfer (self-funded)
 
 ```bash
-node batch-eth-transfer.js
+npm run direct
 ```
 
-Edit the configuration at the top of `batch-eth-transfer.js`:
-```javascript
-const SMART_ACCOUNT_ADDRESS = '0xE0b9dEa53a90B7a2986356157e2812e5335A4a1D'; // 👈 EIP-7702 Smart Account
-const RECIPIENTS = [
-    { address: '0xFA992c932fab1B6B6E77318f25313c7Ef6E9b3Eb', amount: '0.001' }, // 👈 Recipient 1
-    { address: '0x1234567890123456789012345678901234567890', amount: '0.002' }, // 👈 Recipient 2
-    { address: '0x9876543210987654321098765432109876543210', amount: '0.003' }, // 👈 Recipient 3
-];
-```
+Edit `CONFIG.directRecipients` in `src/index.js` (to, amountEth per recipient).
 
-**Required Environment Variables for Sponsored Transfer:**
+**Required Environment Variables for Sponsored Transfer (sections 3–4):**
 ```env
 BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
 SPONSOR_PRIVATE_KEY=your_sponsor_wallet_private_key_here
@@ -186,7 +179,7 @@ MIT License - feel free to use and modify as needed.
 Use this to clear delegation by authorizing the zero address.
 
 ```bash
-node revert.js
+npm run revert
 ```
 
 Requires in `.env`:
